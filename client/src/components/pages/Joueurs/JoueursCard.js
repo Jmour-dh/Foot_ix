@@ -2,6 +2,9 @@ import React from 'react'
 import styles from './Joueurs.module.scss'
 
 const JoueursCard = ( {joueurs} ) => {
+
+  
+
   return (
     <div className={styles.playerCardWrapper}>
       {joueurs?.map((joueur) => {
