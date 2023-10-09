@@ -4,7 +4,6 @@
   padding: 50px 30px;
 }
 
-
 .playerCardWrapper{
 
   display: flex;
@@ -19,7 +18,12 @@
     background-position: left bottom;
     background-size: 200px;
     background-repeat: no-repeat;
-    margin: 50px 10px;
+    margin: 50px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+
 
     .playerCardInformations{
       width: 100%;
@@ -37,29 +41,30 @@
         color: var(--primary);
       }
 
-      .playerFullname{
-        position: absolute;
-        right: 0;
-        top: 0;
-        transform: rotate(90deg) translateY(-30%) translateX(50%);
-        font-family: var(--font-family-rubik);
-        z-index: -1;
-
-        .playerFirstname{
-          font-size: 1.2rem;
-          color: red;
-        }
-
-        .playerLastname{
-          font-size: 1.9rem;
-          color: blue;
-        }
-      }
     }
     .countryFlag{
       width: 25px;
       height: 25px;
       border-radius: 50%;
+    }
+
+    .playerFullname{
+      transform: rotate(90deg);
+      font-family: var(--font-family-rubik);
+      z-index: -1;
+      text-shadow: 0 0 2px white;
+      text-align: center;
+      width: 70px;
+
+      .playerLastname{
+        font-size: 1.5rem;
+        color: rgb(132, 1, 1);
+      }
+
+      .playerFirstname{
+        font-size: 2.5rem;
+        color: var(--primary)
+      }
     }
 
   }

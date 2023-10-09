@@ -25,16 +25,11 @@ const JoueursCard = () => {
             <div className={styles.playerCardInformations} style={{backgroundImage: `url(${joueur.photo})`}}>
               <p className={styles.jerseyNumber} style={{color: joueur.currentClubColor}}>{joueur.jerseyNumber}</p>
               <img className={styles.countryFlag} src={joueur.countryFlag}/>
-              <div className={styles.playerFullname}>
-                <p className={styles.playerFirstname}>{joueur.firstname}</p> 
+            </div>
+            <div className={styles.playerFullname}>
                 <p className={styles.playerLastname}>{joueur.lastname}</p>
-                
-              </div>
+                <p className={styles.playerFirstname}>{joueur.firstname}</p> 
             </div>
-            <div className={styles.playerCardName}>
-              
-            </div>
-            
           </div>
           
         )

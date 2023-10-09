@@ -11,12 +11,9 @@ function AdminJoueusForm() {
   const validationSchema = yup.object({
     jerseyNumber: yup.number().required("Entrez le numéro du malliot"),
     firstname: yup
-      .string()
-      .required("Il faut préciser votre nom")
-      .min(2, "Un vrai nom"),
+      .string(),
     lastname: yup
       .string()
-      .required("Il faut préciser votre prénom")
       .min(2, "Un vrai nom"),
     age: yup.number().required("Il faut préciser l'age"),
     dateOfBirth: yup.date().required("Il faut préciser la date de naissance"),
