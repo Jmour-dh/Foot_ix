@@ -1,0 +1,23 @@
+.Linkactive{
+  color: var(--secondary);
+  font-weight: 700;
+  position: relative;
+}
+
+.Linkactive:after {
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: var(--secondary);
+  width: 100%;
+}
+
+.form-error {
+  margin: 0;
+  color: var(--red-1);
+  font-weight: 500;
+  font-size: 1rem;
+}

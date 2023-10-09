@@ -1,0 +1,89 @@
+.playerListTitle{
+
+  display: flex;
+  justify-content: center;
+
+  h2{
+    margin: 50px 0;
+    font-size: 2rem;
+    font-family: var(--font-family-rubik);
+    background-color: var(--secondary);
+    display: inline-block;
+    padding: 20px 50px;
+  }
+}
+
+.registeredPlayerListWrapper{
+  color: white;
+  height: 75px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 30px;
+
+  .registeredPlayerListContainer{
+    background-color: var(--primary);
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 30px;
+    margin-bottom: 20px;
+
+    > div:first-child, > div:nth-child(2){
+      width: 15%;
+    }
+
+    .registeredPlayerIdentityWrapper{
+
+      display: flex;
+      align-items: center;
+      height: 100%;
+      gap: 30px;
+
+      .registeredPlayerFullName{
+        
+
+        p{
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      .registeredPlayerListPhotoWrapper{
+        height: 100%;
+        width: 50px;
+        background-position: 65% 6%;
+        background-size: 130px;
+      }
+    }
+
+    .registeredPlayerInfosWrapper{
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .registeredPlayerCurrentClubLogo{
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        img{
+          height: 70%;
+        }
+      }
+    }
+
+    .registeredPlayerDelete{
+
+      button{
+        padding: 10px 20px;
+        background-color: rgb(132, 1, 1);
+        color: white;
+        font-weight: 600;
+        font-family: var(--rubik-mono-one);
+        cursor: pointer;
+      }
+    }
+  }
+}

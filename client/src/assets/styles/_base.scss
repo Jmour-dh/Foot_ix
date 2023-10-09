@@ -1,0 +1,26 @@
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: inherit;
+  font-weight: inherit;
+  text-decoration: none;
+  border: none;
+  line-height: inherit;
+  list-style: none;
+}
+
+a{
+  color: white;
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+body{
+  font-family: var(--font-family-roboto);
+}
+  
