@@ -1,20 +1,37 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styles from './AdminJoueursList.module.scss'
+import { Link } from "react-router-dom";
+import styles from "./AdminJoueursList.module.scss";
 
 function AdminJoueursList() {
   const [joueurs, setJoueurs] = useState([]);
+
   useEffect(() => {
-    // Effectue une requête GET à l'API pour récupérer la liste des contacts
+    // Effectuez une requête GET à l'API pour récupérer la liste des joueurs
     axios
       .get("/api/joueurs")
       .then((response) => {
         setJoueurs(response.data);
       })
       .catch((error) => {
-        console.error("Erreur lors de la récupération des users :", error);
+        console.error("Erreur lors de la récupération des joueurs :", error);
       });
   }, []);
+
+  const handleDelete = async (joueurId) => {
+    try {
+      // Effectuez une requête DELETE à l'API pour supprimer le joueur
+      await axios.delete(`/api/joueurs/${joueurId}`);
+
+      // Mettez à jour la liste des joueurs après la suppression
+      setJoueurs((prevJoueurs) =>
+        prevJoueurs.filter((joueur) => joueur._id !== joueurId)
+      );
+    } catch (error) {
+      console.error("Erreur lors de la suppression du joueur :", error);
+    }
+  };
+
   return (
     <div>
       <div className={styles.playerListTitle}>
@@ -22,25 +39,46 @@ function AdminJoueursList() {
       </div>
       <div className={styles.registeredPlayerListWrapper}>
         {joueurs.map((joueur) => (
-          <div className={styles.registeredPlayerListContainer}>
+          <div
+            key={joueur._id}
+            className={styles.registeredPlayerListContainer}
+          >
             <div className={styles.registeredPlayerIdentityWrapper}>
-              <div key={joueur.id} className={styles.registeredPlayerListPhotoWrapper} style={{backgroundImage: `url(${joueur.photo})`}}>
-              </div>
-              <div key={joueur.id} className={styles.registeredPlayerFullName}>
-                <p>{joueur.lastname} {joueur.firstname}</p>
+              <div
+                className={styles.registeredPlayerListPhotoWrapper}
+                style={{ backgroundImage: `url(${joueur.photo})` }}
+              ></div>
+              <div className={styles.registeredPlayerFullName}>
+                <p>
+                  {joueur.lastname} {joueur.firstname}
+                </p>
               </div>
             </div>
             <div className={styles.registeredPlayerInfosWrapper}>
-              <div key={joueur.id} className={styles.registeredPlayerCurrentClub}>
+              <div className={styles.registeredPlayerCurrentClub}>
                 <p>{joueur.currentClub}</p>
               </div>
-              <div key={joueur.id} className={styles.registeredPlayerCurrentClubLogo}>
-                <img src={joueur.currentClubLogo}/>
+              <div className={styles.registeredPlayerCurrentClubLogo}>
+                <img
+                  src={joueur.currentClubLogo}
+                  alt={`${joueur.currentClub} Logo`}
+                />
               </div>
             </div>
             <div className={styles.registeredPlayerCRUD}>
-              <button className={styles.registeredPlayerUpdate}>Modifier</button>
-              <button className={styles.registeredPlayerDelete}>Supprimer</button>
+              {/* Utilisez le composant Link pour rediriger vers la page de modification */}
+              <Link
+                to={`../editJoueur/${joueur._id}`}
+                className={styles.registeredPlayerUpdate}
+              >
+                Modifier
+              </Link>
+              <button
+                className={styles.registeredPlayerDelete}
+                onClick={() => handleDelete(joueur._id)}
+              >
+                Supprimer
+              </button>
             </div>
           </div>
         ))}
