@@ -71,13 +71,41 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const joueurs = await JoueurModel.find();
     res.json(joueurs);
   } catch (err) {
     console.error(err);
-    res.status(500).json('Oops une erreur est survenue');
+    res.status(500).json("Oops une erreur est survenue");
+  }
+});
+
+// delete un joueur
+
+router.delete("/:id", async (req, res) => {
+  const joueurId = req.params.id;
+
+  try {
+    // Vérifier si le joueur existe
+    const existingJoueur = await JoueurModel.findById(joueurId);
+    if (!existingJoueur) {
+      return res.status(404).json("Joueur non trouvé");
+    }
+
+    // Supprimer le joueur de la base de données
+    await JoueurModel.deleteOne({ _id: joueurId });
+
+    // Envoyer une réponse indiquant que le joueur a été supprimé avec succès
+    res.status(200).json("Joueur supprimé avec succès");
+  } catch (err) {
+    console.error("Erreur lors de la suppression du joueur :", err);
+
+    // Envoyer une réponse d'erreur détaillée
+    res.status(500).json({
+      error: "Oops, une erreur est survenue lors de la suppression du joueur",
+      details: err.message,
+    });
   }
 });
 
