@@ -210,7 +210,7 @@ function AdminJoueusForm() {
             <input
               type="number"
               name="goalsConcededForCurrentClub"
-              placeholder="Entrez les buts encaissés par le joueur..."
+              placeholder="Buts concédés / Buts marqués..."
               {...register("goalsConcededForCurrentClub")}
             />
             {errors.goalsConcededForCurrentClub && (
@@ -219,7 +219,7 @@ function AdminJoueusForm() {
             <input
               type="text"
               name="cleanSheetsForCurrentClub"
-              placeholder="Entrez les cartes pour le club actuel du joueur..."
+              placeholder="Clean sheets / Passes décisives..."
               {...register("cleanSheetsForCurrentClub")}
             />
             {errors.cleanSheetsForCurrentClub && (

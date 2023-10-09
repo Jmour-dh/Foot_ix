@@ -49,7 +49,7 @@ const Data = [
     dateOfBirth: '30/05/2001',
     height: '1,85m',
     country: 'Espagne',
-    countryFlag: 'https://cdn-icons-png.flaticon.com/128/5921/5921991.png',
+    countryFlag: 'https://cdn-icons-png.flaticon.com/128/10601/10601048.png',
     currentClub: 'Paris Saint-Germain',
     currentClubLogo: 'https://upload.wikimedia.org/wikipedia/fr/thumb/8/86/Paris_Saint-Germain_Logo.svg/1200px-Paris_Saint-Germain_Logo.svg.png',
     atCurrentClubSince: '2017',
