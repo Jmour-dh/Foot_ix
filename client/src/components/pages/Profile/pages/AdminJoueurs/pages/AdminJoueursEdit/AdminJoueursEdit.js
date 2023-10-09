@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 function AdminJoueursEdit() {
   const navigate = useNavigate();
@@ -74,14 +74,7 @@ function AdminJoueursEdit() {
     initialValues,
     resolver: yupResolver(validationSchema),
   });
-  // const submit = handleSubmit(async (joueur) => {
-  //   try {
-  //     clearErrors();
-  //     navigate("/profile/players/list");
-  //   } catch (message) {
-  //     setError("generic", { type: "generic", message });
-  //   }
-  // });
+ 
 
   useEffect(() => {
     const fetchJoueurById = async () => {
