@@ -38,8 +38,9 @@ function AdminJoueursList() {
                 <img src={joueur.currentClubLogo}/>
               </div>
             </div>
-            <div className={styles.registeredPlayerDelete}>
-              <button>Supprimer</button>
+            <div className={styles.registeredPlayerCRUD}>
+              <button className={styles.registeredPlayerUpdate}>Modifier</button>
+              <button className={styles.registeredPlayerDelete}>Supprimer</button>
             </div>
           </div>
         ))}

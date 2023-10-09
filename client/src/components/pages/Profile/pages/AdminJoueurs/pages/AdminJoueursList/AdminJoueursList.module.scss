@@ -74,15 +74,27 @@
       }
     }
 
-    .registeredPlayerDelete{
+    .registeredPlayerCRUD{
 
-      button{
+      .registeredPlayerDelete{
+
         padding: 10px 20px;
         background-color: rgb(132, 1, 1);
         color: white;
         font-weight: 600;
         font-family: var(--rubik-mono-one);
         cursor: pointer;
+        margin-left: 10px;
+      }
+
+      .registeredPlayerUpdate{
+        padding: 10px 20px;
+        background-color: rgb(218, 238, 255);
+        color: rgb(0, 0, 0);
+        font-weight: 600;
+        font-family: var(--rubik-mono-one);
+        cursor: pointer;
+
       }
     }
   }
