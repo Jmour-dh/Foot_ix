@@ -81,6 +81,26 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  const playerId = req.params.id;
+
+  try {
+    // Recherchez le joueur par ID dans la base de données
+    const joueur = await JoueurModel.findById(playerId);
+
+    // Vérifiez si le joueur a été trouvé
+    if (!joueur) {
+      return res.status(404).json("Joueur non trouvé");
+    }
+
+    // Renvoyez le joueur trouvé en réponse
+    res.json(joueur);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json("Oops une erreur est survenue");
+  }
+});
+
 // delete un joueur
 
 router.delete("/:id", async (req, res) => {
@@ -104,6 +124,41 @@ router.delete("/:id", async (req, res) => {
     // Envoyer une réponse d'erreur détaillée
     res.status(500).json({
       error: "Oops, une erreur est survenue lors de la suppression du joueur",
+      details: err.message,
+    });
+  }
+});
+
+//update un joueur
+
+router.put("/:id", async (req, res) => {
+  const joueurId = req.params.id;
+
+  try {
+    // Vérifiez si le joueur existe
+    const existingJoueur = await JoueurModel.findById(joueurId);
+    if (!existingJoueur) {
+      return res.status(404).json("Joueur non trouvé");
+    }
+
+    // Mettez à jour uniquement les champs fournis dans le corps de la requête
+    Object.keys(req.body).forEach((key) => {
+      if (req.body[key] !== undefined) {
+        existingJoueur[key] = req.body[key];
+      }
+    });
+
+    // Enregistrez les modifications dans la base de données
+    const updatedJoueur = await existingJoueur.save();
+
+    // Envoyez le joueur mis à jour en tant que réponse
+    res.status(200).json(updatedJoueur);
+  } catch (err) {
+    console.error("Erreur lors de la mise à jour du joueur :", err);
+
+    // Envoyez une réponse d'erreur détaillée
+    res.status(500).json({
+      error: "Oops, une erreur est survenue lors de la mise à jour du joueur",
       details: err.message,
     });
   }

@@ -25,6 +25,12 @@ const AdminJoueursForm = lazy(() =>
   )
 );
 
+const AdminJoueursEdit = lazy(() =>
+  import(
+    "./components/pages/Profile/pages/AdminJoueurs/pages/AdminJoueursEdit/AdminJoueursEdit"
+  )
+);
+
 const AdminAdmins = lazy(() =>
   import("./components/pages/Profile/pages/AdminAdmins/AdminAdmins")
 );
@@ -99,6 +105,10 @@ export const router = createBrowserRouter([
                 element: <AdminJoueursForm />,
               },
               {
+                path: "editJoueur/:id",
+                element: <AdminJoueursEdit />,
+              },
+              {
                 index: true,
                 loader: async () => redirect('/profile/players/list'),
               },
@@ -116,6 +126,7 @@ export const router = createBrowserRouter([
                 path: "newAdmin",
                 element: <AdminAdminsForm />,
               },
+             
               {
                 index: true,
                 loader: async () => redirect('/profile/admins/listAdmins'),

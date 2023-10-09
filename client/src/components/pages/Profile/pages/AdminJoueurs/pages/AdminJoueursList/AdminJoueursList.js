@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import styles from "./AdminJoueursList.module.scss";
 
 function AdminJoueursList() {
   const [joueurs, setJoueurs] = useState([]);
 
   useEffect(() => {
-    // Effectue une requête GET à l'API pour récupérer la liste des joueurs
+    // Effectuez une requête GET à l'API pour récupérer la liste des joueurs
     axios
       .get("/api/joueurs")
       .then((response) => {
@@ -19,10 +20,10 @@ function AdminJoueursList() {
 
   const handleDelete = async (joueurId) => {
     try {
-      // Effectue une requête DELETE à l'API pour supprimer le joueur
+      // Effectuez une requête DELETE à l'API pour supprimer le joueur
       await axios.delete(`/api/joueurs/${joueurId}`);
 
-      // Met à jour la liste des joueurs après la suppression
+      // Mettez à jour la liste des joueurs après la suppression
       setJoueurs((prevJoueurs) =>
         prevJoueurs.filter((joueur) => joueur._id !== joueurId)
       );
@@ -65,9 +66,13 @@ function AdminJoueursList() {
               </div>
             </div>
             <div className={styles.registeredPlayerCRUD}>
-              <button className={styles.registeredPlayerUpdate}>
+              {/* Utilisez le composant Link pour rediriger vers la page de modification */}
+              <Link
+                to={`../editJoueur/${joueur._id}`}
+                className={styles.registeredPlayerUpdate}
+              >
                 Modifier
-              </button>
+              </Link>
               <button
                 className={styles.registeredPlayerDelete}
                 onClick={() => handleDelete(joueur._id)}

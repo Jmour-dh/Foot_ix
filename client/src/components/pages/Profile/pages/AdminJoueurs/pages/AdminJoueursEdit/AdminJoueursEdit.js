@@ -1,13 +1,14 @@
-import React from "react";
-import styles from "./AdminJoueusFrom.module.scss";
+import styles from "./AdminJoueursEdit.module.scss";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useNavigate } from "react-router-dom";
-import { createJoueur } from "../../../../../../../apis/joueurs";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
-function AdminJoueusForm() {
+function AdminJoueursEdit() {
   const navigate = useNavigate();
+  const { id } = useParams();
   const validationSchema = yup.object({
     jerseyNumber: yup.number().required("Entrez le numéro du malliot"),
     firstname: yup
@@ -38,10 +39,8 @@ function AdminJoueusForm() {
     appearancesForCurrentClub: yup
       .number()
       .required("Il faut préciser l'apparitions pour le club"),
-    goalsConcededForCurrentClub: yup
-      .number(),
-    cleanSheetsForCurrentClub: yup
-      .number(),
+    goalsConcededForCurrentClub: yup.number(),
+    cleanSheetsForCurrentClub: yup.number(),
     photo: yup.string().required("Il faut préciser la photo du joueur"),
   });
 
@@ -66,6 +65,7 @@ function AdminJoueusForm() {
 
   const {
     handleSubmit,
+    setValue,
     register,
     formState: { errors, isSubmitting },
     setError,
@@ -74,19 +74,48 @@ function AdminJoueusForm() {
     initialValues,
     resolver: yupResolver(validationSchema),
   });
+  // const submit = handleSubmit(async (joueur) => {
+  //   try {
+  //     clearErrors();
+  //     navigate("/profile/players/list");
+  //   } catch (message) {
+  //     setError("generic", { type: "generic", message });
+  //   }
+  // });
+
+  useEffect(() => {
+    const fetchJoueurById = async () => {
+      try {
+        const response = await axios.get(`/api/joueurs/${id}`);
+        const joueur = response.data;
+
+        // Pré-remplir le formulaire avec les détails du joueur
+        Object.keys(joueur).forEach((key) => {
+          setValue(key, joueur[key]);
+        });
+      } catch (error) {
+        console.error("Erreur lors de la récupération du joueur par ID :", error);
+      }
+    };
+
+    fetchJoueurById();
+  }, [id, setValue]);
+
   const submit = handleSubmit(async (joueur) => {
     try {
       clearErrors();
-      await createJoueur(joueur);
+      // Envoyez la mise à jour au backend
+      await axios.put(`/api/joueurs/${id}`, joueur);
+      // Redirigez vers la liste des joueurs après la mise à jour
       navigate("/profile/players/list");
-    } catch (message) {
-      setError("generic", { type: "generic", message });
+    } catch (error) {
+      setError("generic", { type: "generic", message: error.message });
     }
   });
 
   return (
     <div className={styles.test}>
-      <h2>Ajouter un joueur</h2>
+      <h2>Modifier un joueur</h2>
       <div className={styles.cnx}>
         <div className={styles.signin}>
           <form onSubmit={submit}>
@@ -123,9 +152,7 @@ function AdminJoueusForm() {
               placeholder="Entrez l'âge du joueur..."
               {...register("age")}
             />
-            {errors.age && (
-              <p className="form-error">{errors.age.message}</p>
-            )}
+            {errors.age && <p className="form-error">{errors.age.message}</p>}
             <input
               type="date"
               name="dateOfBirth"
@@ -205,7 +232,9 @@ function AdminJoueusForm() {
               {...register("appearancesForCurrentClub")}
             />
             {errors.appearancesForCurrentClub && (
-              <p className="form-error">{errors.appearancesForCurrentClub.message}</p>
+              <p className="form-error">
+                {errors.appearancesForCurrentClub.message}
+              </p>
             )}
             <input
               type="number"
@@ -214,7 +243,9 @@ function AdminJoueusForm() {
               {...register("goalsConcededForCurrentClub")}
             />
             {errors.goalsConcededForCurrentClub && (
-              <p className="form-error">{errors.goalsConcededForCurrentClub.message}</p>
+              <p className="form-error">
+                {errors.goalsConcededForCurrentClub.message}
+              </p>
             )}
             <input
               type="text"
@@ -223,7 +254,9 @@ function AdminJoueusForm() {
               {...register("cleanSheetsForCurrentClub")}
             />
             {errors.cleanSheetsForCurrentClub && (
-              <p className="form-error">{errors.cleanSheetsForCurrentClub.message}</p>
+              <p className="form-error">
+                {errors.cleanSheetsForCurrentClub.message}
+              </p>
             )}
             <input
               type="text"
@@ -249,4 +282,4 @@ function AdminJoueusForm() {
   );
 }
 
-export default AdminJoueusForm;
+export default AdminJoueursEdit;
