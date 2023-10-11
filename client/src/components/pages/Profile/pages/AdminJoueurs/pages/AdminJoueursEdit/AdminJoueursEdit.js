@@ -38,6 +38,7 @@ function AdminJoueursEdit() {
     goalsConcededForCurrentClub: yup.number(),
     cleanSheetsForCurrentClub: yup.number(),
     photo: yup.string().required("Il faut préciser la photo du joueur"),
+    profilePhoto: yup.string().required("Il faut préciser la photo pour le profil du joueur")
   });
 
   const initialValues = {
@@ -57,6 +58,7 @@ function AdminJoueursEdit() {
     goalsConcededForCurrentClub: "",
     cleanSheetsForCurrentClub: "",
     photo: "",
+    profilePhoto:""
   };
 
   const {
@@ -255,6 +257,15 @@ function AdminJoueursEdit() {
             />
             {errors.photo && (
               <p className="form-error">{errors.photo.message}</p>
+            )}
+            <input
+              type="text"
+              name="profilePhoto"
+              placeholder="Entrez la photo pour le profil du joueur..."
+              {...register("profilePhoto")}
+            />
+            {errors.profilePhoto && (
+              <p className="form-error">{errors.profilePhoto.message}</p>
             )}
             {errors.generic && (
               <div className="mb-10">

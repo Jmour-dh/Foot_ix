@@ -17,6 +17,7 @@ const joueurSchema = mongoose.Schema({
   goalsConcededForCurrentClub: String,
   cleanSheetsForCurrentClub: String,
   photo: String,
+  profilePhoto: String,
 });
 
 const JoueurModel = mongoose.model("joueur", joueurSchema);

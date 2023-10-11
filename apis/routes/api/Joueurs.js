@@ -19,6 +19,7 @@ router.post("/", async (req, res) => {
     goalsConcededForCurrentClub,
     cleanSheetsForCurrentClub,
     photo,
+    profilePhoto
   } = req.body;
 
   try {
@@ -53,6 +54,7 @@ router.post("/", async (req, res) => {
       goalsConcededForCurrentClub,
       cleanSheetsForCurrentClub,
       photo,
+      profilePhoto
     });
 
     // Save the new joueur to the database
@@ -82,11 +84,11 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  const playerId = req.params.id;
+  const { id } = req.params;
 
   try {
     // Recherchez le joueur par ID dans la base de données
-    const joueur = await JoueurModel.findById(playerId);
+    const joueur = await JoueurModel.findById(id);
 
     // Vérifiez si le joueur a été trouvé
     if (!joueur) {

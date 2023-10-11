@@ -10,9 +10,6 @@ function JoueursListe() {
 
   return (
     <div className={styles.listeWrapper}>
-      <div className={styles.playerFilter}>
-        
-      </div>
       <div className={styles.playerListe}>
         <JoueursCard joueurs={joueurs}/>
       </div>
