@@ -1,9 +1,13 @@
+// index.js
+require('dotenv').config();
 const mongoose = require("mongoose");
 
+const { MONGO_URI } = process.env;
+
+console.log("MONGO_URI:", MONGO_URI); // Ajoutez cette ligne pour le débogage
+
 mongoose
-  .connect(
-    "mongodb+srv://dhia:123@cluster0.oo2ywwi.mongodb.net/footix?retryWrites=true&w=majority"
-  )
+  .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("CONNEXION DB OK !");
   })
