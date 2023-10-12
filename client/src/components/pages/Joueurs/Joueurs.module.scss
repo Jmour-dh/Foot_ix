@@ -4,7 +4,6 @@
   padding: 50px 30px;
 }
 
-
 .playerCardWrapper{
 
   display: flex;
@@ -19,7 +18,12 @@
     background-position: left bottom;
     background-size: 200px;
     background-repeat: no-repeat;
-    margin: 50px 10px;
+    margin: 50px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+
 
     .playerCardInformations{
       width: 100%;
@@ -37,24 +41,6 @@
         color: var(--primary);
       }
 
-      .playerFullname{
-        position: absolute;
-        right: 0;
-        top: 0;
-        transform: rotate(90deg) translateY(-30%) translateX(50%);
-        font-family: var(--font-family-rubik);
-        z-index: -1;
-
-        .playerFirstname{
-          font-size: 1.2rem;
-          color: red;
-        }
-
-        .playerLastname{
-          font-size: 1.9rem;
-          color: blue;
-        }
-      }
     }
     .countryFlag{
       width: 25px;
@@ -62,12 +48,129 @@
       border-radius: 50%;
     }
 
+    .playerFullname{
+      transform: rotate(90deg);
+      font-family: var(--font-family-rubik);
+      z-index: -1;
+      text-shadow: 0 0 2px white;
+      text-align: center;
+      width: 70px;
+
+      .playerLastname{
+        font-size: 1.5rem;
+        color: rgb(132, 1, 1);
+      }
+
+      .playerFirstname{
+        font-size: 2.5rem;
+        color: var(--primary)
+      }
+    }
+
   }
 
   .playerCardElements:hover{
     transition: ease-out 0.5s;
     transform: scale(1.1);
+    opacity: 0.8;
   }
+
+  
+}
+
+
+.playerBanner{
+  height: 600px;
+  background-color: var(--primary);
+  position: relative;
+  box-shadow: inset 0px -10px 200px rgba(0, 0, 0, 0.63);
+  z-index: -3;
+  overflow: hidden;
+
+  .playerBannerNameContainer{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: -2;
+    font-family: var(--font-family-rubik);
+
+    .playerBannerLastname{
+      font-size: 3rem;
+      color: rgb(132, 1, 1);
+    }
+
+    .playerBannerFirstname{
+      font-size: 10rem;
+      color: white;
+    }
+  }
+
+  .playerBannerImage{
+    width: 30%;
+    position: absolute;
+    right: 35%;
+    top: 5%;
+    z-index: -1;
+  }
+}
+
+.playerInformations{
+  z-index: -2;
+  display: flex;
+  padding: 5% 5% 0 5%;
+  margin-bottom: -0.5%;
+  justify-content: left;
+  gap: 5%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50%;
+
+  .playerInformationsPhoto{
+    position: relative;
+    z-index: -1;
+
+    .playerInformationsPhotoNumber{
+      font-size: 35rem;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      color: var(--primary);
+      text-shadow: 10px 10px rgb(132, 1, 1);
+      font-weight: 700;
+      z-index: -1;
+    }
+
+    .playerInformationsPhotoProfile{
+      width: 70%;
+      margin-left: 100px;
+    }
+  }
+
+  .playerInformationsText h2{
+    font-size: 2.3rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+  }
+
+  .playerInformationsText p{
+    margin-bottom: 1rem;
+  }
+
+  .playerInformationsTextFlex{
+    display: flex;
+    font-size: 1.5rem;
+    justify-content: space-between;
+    color: rgba(0, 0, 0, 0.56);
+    gap: 100px;
+
+    .playerInformationsTextProfile p{
+      color: rgb(0, 0, 0);
+    }
+  }
+
+  
 
   
 }

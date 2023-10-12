@@ -7,6 +7,7 @@ import { rootLoader } from "./components/loaders/rootLoader";
 
 const Home = lazy(() => import("./components/pages/Home/Home"));
 const JoueursListe = lazy(() => import("./components/pages/Joueurs/JoueursListe"));
+const Joueur = lazy(() => import("./components/pages/Joueurs/Joueur"));
 const Stades = lazy(() => import("./components/pages/stades/Stades"));
 const Clubs = lazy(() => import("./components/pages/clubs/Clubs"));
 const Signin = lazy(() => import("./components/pages/Signin/Signin"));
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
       {
         path: "/joueurs",
         element: <JoueursListe />,
+      },
+      {
+        path: `/joueurs/:id`,
+        element: <Joueur />
       },
       {
         path: "/stades",

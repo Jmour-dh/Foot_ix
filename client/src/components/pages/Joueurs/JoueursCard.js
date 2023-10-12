@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import styles from './Joueurs.module.scss'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const JoueursCard = () => {
+
+  const navigate = useNavigate();
 
   const [joueurs, setJoueurs] = useState([]);
   useEffect(() => {
@@ -17,29 +20,31 @@ const JoueursCard = () => {
       });
   }, []);
 
+  // console.log(joueurs[0]._id)
+
+  const handlePlayerSelect = (id) => {
+    console.log(id)
+    navigate(`/joueurs/${id}`);
+  }
+
   return (
     <div className={styles.playerCardWrapper}>
-      {joueurs?.map((joueur) => {
+      {joueurs[0]? joueurs.map((joueur) => {
         return(
-          <div className={styles.playerCardElements} key={joueur.id} style={{backgroundImage: `url(${joueur.currentClubLogo})`}}>
+          <div className={styles.playerCardElements} key={joueur._id} style={{backgroundImage: `url(${joueur.currentClubLogo})`}} onClick={() => handlePlayerSelect(joueur._id)}>
             <div className={styles.playerCardInformations} style={{backgroundImage: `url(${joueur.photo})`}}>
               <p className={styles.jerseyNumber} style={{color: joueur.currentClubColor}}>{joueur.jerseyNumber}</p>
               <img className={styles.countryFlag} src={joueur.countryFlag}/>
-              <div className={styles.playerFullname}>
-                <p className={styles.playerFirstname}>{joueur.firstname}</p> 
+            </div>
+            <div className={styles.playerFullname}>
                 <p className={styles.playerLastname}>{joueur.lastname}</p>
-                
-              </div>
+                <p className={styles.playerFirstname}>{joueur.firstname}</p> 
             </div>
-            <div className={styles.playerCardName}>
-              
-            </div>
-            
           </div>
           
         )
-      })
-      }
+      }) : <div></div>
+      } 
     </div>
   )
 }
